@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { Task } from './task.entity';
-import JsonDB from 'node-json-db';
-import { Config } from 'node-json-db/dist/lib/JsonDBConfig';
+import { JsonDB, Config } from 'node-json-db';
+
 import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class TaskRepository {
-  private db: JsonDB.JsonDB;
+  private db: JsonDB;
 
   constructor() {
-    this.db = new JsonDB.JsonDB(new Config('myDatabase', true, false, '/'));
+    this.db = new JsonDB(new Config('myDatabase', true, false, '/'));
   }
 
   getAllTasks(): Task[] {

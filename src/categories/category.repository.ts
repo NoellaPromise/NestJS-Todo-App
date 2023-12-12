@@ -1,15 +1,14 @@
-import JsonDB from 'node-json-db';
-import { Config } from 'node-json-db/dist/lib/JsonDBConfig';
+import { JsonDB, Config } from 'node-json-db';
 import { Injectable } from '@nestjs/common';
 import { Category } from './category.entity';
 import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class CategoryRepository {
-  private db: JsonDB.JsonDB;
+  private db: JsonDB;
 
   constructor() {
-    this.db = new JsonDB.JsonDB(new Config('myDatabase', true, false, '/'));
+    this.db = new JsonDB(new Config('myDatabase', true, false, '/'));
   }
 
   getAllCategories(): Category[] {
