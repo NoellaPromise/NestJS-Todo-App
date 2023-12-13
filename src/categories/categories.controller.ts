@@ -1,6 +1,7 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, ValidationPipe } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { Category } from './category.entity';
+import { CreateCategoryDto } from './dto/create-category.dto';
 
 @Controller('categories')
 export class CategoriesController {
@@ -12,7 +13,9 @@ export class CategoriesController {
   }
 
   @Post()
-  createCategory(@Body() body: { name: string }): Category {
-    return this.categoryService.createCategory(body.name);
+  createCategory(
+    @Body(ValidationPipe) createCategoryDto: CreateCategoryDto,
+  ): Category {
+    return this.categoryService.createCategory(createCategoryDto.name);
   }
 }
